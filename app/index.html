@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS Button Generator</title>
+	<!--build:css css/main.min.css -->
+	<link rel="stylesheet" href="./lib/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./lib/css/styles.css">
+	<link rel="stylesheet" type="text/css" href="./lib/spectrum.css">
+	<!-- endbuild -->
+
+	<!--build:js js/main.min.js -->
+	<script src="https://use.fontawesome.com/5439377f1e.js"></script>
+	<script type="text/javascript" src="./lib/jquery-3.0.0.min.js"></script>
+	<script src="./lib/angular.min.js"></script>
+	<script src="./lib/spectrum.js"></script>
+	<script src="./lib/angular-spectrum-colorpicker.min.js"></script>
+	<script src="./lib/js/app.js"></script>
+	<!-- endbuild -->
+	
+</head>
+<body ng-app="buttons" ng-controller="MainCtrl">
+	<div class="container">
+		<div class="row">
+			<h1>Create Your Own Button</h1>
+			<nav>
+				<ul class="nav nav-tabs">
+					<li ng-class="{active: pageSet(1)}">
+						<a href ng-click="setPage(1)">Builder</a>
+					</li>
+					<li ng-class="{active: pageSet(2)}">
+						<a href ng-click="setPage(2)">Code</a>
+					</li>
+				</ul>
+			</nav>
+			<div id="build" ng-show="pageSet(1)">
+				<div class="col-md-1 row sideNav">
+			  		<ul class="nav">
+				       	<li ng-class="{ active: isSet(1) }">
+				          	<a href ng-click="setTab(1)">Font</a>
+				       	</li>
+				       	<li ng-class="{ active: isSet(2) }">
+				          	<a href ng-click="setTab(2)">Box</a>
+				       	</li>
+			     	</ul>
+			  	</div>
+
+				<div id="settings" class="col-md-6">
+					<div id="fontSettings" ng-show="isSet(1)">
+						<div class="box form-group form-inline">
+							<label for="text">Text</label>
+							<input type="text" class="form-control" placeholder="Text", ng-model="value">
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Font Size</label>
+							<input type="text" class="form-control" placeholder="Text" ng-model="fontsize">
+							<input type="range" min="1" max="50" step="1" class="form-control" ng-model="fontsize">
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Font Color</label>
+							<input type="text" class="form-control" placeholder="Font Color" ng-model="color">
+							<spectrum-colorpicker type="text" id="colorpicker" ng-model="color" format="'hex'"></spectrum-colorpicker>		
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Font Family</label>
+							<select class="form-control" ng-options="font for font in fonts" ng-model="font"></select>
+						</div>
+						<div class="box form-group form-inline">
+							<label>Features</label>
+							<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="toggleBold = !toggleBold" ng-style="{backgroundColor: toggleBold ? 'gray' : 'white'}">
+								<i class="fa fa-bold" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="toggleItalic = !toggleItalic" ng-style="{backgroundColor: toggleItalic ? 'gray' : 'white'}">
+								<i class="fa fa-italic" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="toggleUnderline = !toggleUnderline" ng-style="{backgroundColor: toggleUnderline ? 'gray' : 'white'}">
+								<i class="fa fa-underline" aria-hidden="true"></i>
+							</button>
+							<button type="button" class="btn btn-default" aria-label="Left Align" ng-click="toggleStrike = !toggleStrike" ng-style="{backgroundColor: toggleStrike ? 'gray' : 'white'}">
+								<i class="fa fa-strikethrough" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Letter Spacing</label>
+							<input type="text" class="form-control" placeholder="Letter Spacing" ng-model="letterspacing">
+							<input type="range" min="0" max="20" step="1" class="form-control" ng-model="letterspacing">
+						</div>
+						<div class="box form-group">
+							<!-- <img class="icon" src="./images/bold.png"> -->
+						</div>
+						<div class="box form-group form-inline">
+							<input type="checkbox" ng-model="activated">
+							<label for="text">Text Shadow</label>
+							<input type="text" class="form-control" placeholder="X" ng-model="textShadowX" ng-disabled="!activated">
+							<input type="text" class="form-control" placeholder="Y" ng-model="textShadowY" ng-disabled="!activated">
+							<spectrum-colorpicker type="text" ng-model="textShadowColor" format="'hex'" ng-disabled="!activated"></spectrum-colorpicker>
+						</div>
+					</div>
+					<div id="boxSettings" ng-show="isSet(2)">
+						<div class="box form-group form-inline">
+							<label for="text">Button Color</label>
+							<input type="text" class="form-control" placeholder="Button Color" ng-model="bgcolor">
+							<spectrum-colorpicker type="text" id="colorpicker" ng-model="bgcolor" format="'hex'"></spectrum-colorpicker>
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Border Radius</label>
+							<input type="text" class="form-control" placeholder="Border Radius" ng-model="borderradius">
+							<input type="range" min="0" max="50" step="1" class="form-control" placeholder="Button Color" ng-model="borderradius">
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Border Color</label>
+							<input type="text" class="form-control" placeholder="Border Color" ng-model="bordercolor">
+							<spectrum-colorpicker type="text" ng-model="bordercolor" format="'hex'"></spectrum-colorpicker>
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Border Width</label>
+							<input type="text" class="form-control" placeholder="Border Width" ng-model="borderwidth">
+							<input type="range" min="0" max="20" step="1" class="form-control" ng-model="borderwidth">
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Border Style</label>
+							<select class="form-control" ng-options="borderstyle for borderstyle in borderstyles" ng-model="borderstyle"></select>
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Padding</label>
+							<i class="fa fa-arrows-v" aria-hidden="true"></i>
+							<input type="number" min="0" max="40" step="1" value="15" class="form-control" ng-model="paddingV">
+							<i class="fa fa-arrows-h" aria-hidden="true"></i>
+							<input type="number" min="0" max="40" step="1" value="30" class="form-control" ng-model="paddingH">
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Padding</label>
+							<input type="text" class="form-control" placeholder="Padding" ng-model="padding">
+							<input type="range" min="0" max="40" step="1" class="form-control" ng-model="padding">
+						</div>
+					</div>	
+				</div>
+				<div class="col-md-5" id="previewBox">
+					<h3>Preview:</h3><br>
+					<div id="previewInner">
+						<a class="button" ng-style="{
+							background: bgcolor, 
+							height: height + 'px', 
+							width: width, 
+							borderRadius: borderradius + '%', 
+							textAlign: 'center', 
+							padding: paddingV + 'px ' + paddingH + 'px', 
+							borderWidth: borderwidth + 'px', 
+							borderColor: bordercolor, 
+							borderStyle: borderstyle, 
+							position: 'relative', 
+							color: color, 
+							fontSize: fontsize + 'px', 
+							fontFamily: font, 
+							textShadow: (textShadowX +'px '+ textShadowY +'px '+ textShadowColor), 
+							lineHeight: lineheight, 
+							letterSpacing: letterspacing + 'px', 
+							fontStyle: italic,
+							fontWeight: bold,
+							textDecoration: underline + ' ' + lineThrough
+						}">{{value}}</a>
+					</div>
+				</div>
+			</div> <!-- Close Build Section -->
+
+
+
+			<div id="code" ng-show="pageSet(2)">
+				<div id="codeArea">
+					<textarea rows="40" placeholder="Paste Your Code Here"></textarea>
+				</div>
+			</div>
+
+			<div id="line">
+				<button class="btn" id="save">Save</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
