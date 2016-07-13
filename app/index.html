@@ -103,23 +103,24 @@
 							<spectrum-colorpicker type="text" id="colorpicker" ng-model="bgcolor" format="'hex'"></spectrum-colorpicker>
 						</div>
 						<div class="box form-group form-inline">
-							<label for="text">Border Radius</label>
-							<input type="text" class="form-control" placeholder="Border Radius" ng-model="borderradius">
-							<input type="range" min="0" max="50" step="1" class="form-control" placeholder="Button Color" ng-model="borderradius">
-						</div>
-						<div class="box form-group form-inline">
 							<label for="text">Border Color</label>
 							<input type="text" class="form-control" placeholder="Border Color" ng-model="bordercolor">
 							<spectrum-colorpicker type="text" ng-model="bordercolor" format="'hex'"></spectrum-colorpicker>
 						</div>
 						<div class="box form-group form-inline">
+							<label for="text">Border Style</label>
+							<select class="form-control" ng-options="borderstyle for borderstyle in borderstyles" ng-model="borderstyle"></select>
+						</div>
+						<div class="box form-group form-inline">
+							<label for="text">Border Radius</label>
+							<input type="text" class="form-control" placeholder="Border Radius" ng-model="borderradius">
+							<input type="range" min="0" max="50" step="1" class="form-control" placeholder="Button Color" ng-model="borderradius">
+						</div>
+						
+						<div class="box form-group form-inline">
 							<label for="text">Border Width</label>
 							<input type="text" class="form-control" placeholder="Border Width" ng-model="borderwidth">
 							<input type="range" min="0" max="20" step="1" class="form-control" ng-model="borderwidth">
-						</div>
-						<div class="box form-group form-inline">
-							<label for="text">Border Style</label>
-							<select class="form-control" ng-options="borderstyle for borderstyle in borderstyles" ng-model="borderstyle"></select>
 						</div>
 						<div class="box form-group form-inline">
 							<label for="text">Padding</label>
@@ -127,11 +128,6 @@
 							<input type="number" min="0" max="40" step="1" value="15" class="form-control" ng-model="paddingV">
 							<i class="fa fa-arrows-h" aria-hidden="true"></i>
 							<input type="number" min="0" max="40" step="1" value="30" class="form-control" ng-model="paddingH">
-						</div>
-						<div class="box form-group form-inline">
-							<label for="text">Padding</label>
-							<input type="text" class="form-control" placeholder="Padding" ng-model="padding">
-							<input type="range" min="0" max="40" step="1" class="form-control" ng-model="padding">
 						</div>
 					</div>	
 				</div>
